@@ -16,6 +16,7 @@ from scipy.stats import norm
 from sklearn.metrics import roc_curve
 from tqdm import tqdm
 
+# config
 BASE         = Path(__file__).parent
 PUB_PATH     = BASE / "pub.pt"
 PRIV_PATH    = BASE / "priv.pt"
@@ -38,7 +39,7 @@ MOMENTUM     = 0.9
 WEIGHT_DECAY = 5e-4
 NUM_CLASSES  = 9
 
-
+# noemalization
 MEAN         = [0.7406, 0.5331, 0.7059]
 STD          = [0.1491, 0.1864, 0.1301]
 
@@ -52,7 +53,7 @@ SCORES_DIR.mkdir(exist_ok=True)
 
 print(f"Device : {DEVICE}")
 
-
+#dataset classes
 class TaskDataset(Dataset):
    def __init__(self, transform=None):
        self.ids       = []
@@ -124,7 +125,7 @@ def make_model():
 
 
 
-
+# load model
 def load_model(path):
    m = make_model()
    m.load_state_dict(torch.load(path, map_location=DEVICE))
@@ -428,16 +429,12 @@ try:
    if resp.status_code == 413:
        die("Upload rejected: file too large (HTTP 413).")
 
-
    resp.raise_for_status()
-
-
    print("Successfully submitted.")
    print("Server response:", body)
    submission_id = body.get("submission_id")
    if submission_id:
        print(f"Submission ID: {submission_id}")
-
 
 except requests.exceptions.RequestException as e:
    detail = getattr(e, "response", None)
