@@ -14,7 +14,7 @@ Place `pub.pt`, `priv.pt`, and `model.pt` in the same directory as `task_templat
 python train_shadows.py
 
 Hyperparameters
-Architecture: ResNet-18 (modified for 32×32 input) |
+Architecture: ResNet-18 (modified for 32×32 input) 
 Epochs 100
 Batch size 128 
 Num shadow models 64 
